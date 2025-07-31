@@ -39,11 +39,15 @@ def upload_file(file: UploadFile = File(...), username: str = Form(...), passwor
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
     # Save the file to uploads directory
-    with open(f"uploads/{file.filename}", "wb") as buffer:
-        buffer.write(file.file.read())
+    file_path = f"uploads/{file.filename}"
+    with open(file_path, "wb") as buffer:
+        content = file.file.read()
+        buffer.write(content)
     
     # Add file to index
-    add_file_to_index(file.filename, os.path.getsize(f"uploads/{file.filename}"), datetime.now().isoformat())
+    file_size = len(content)
+    upload_time = datetime.now().isoformat()
+    add_file_to_index(file.filename, file_size, upload_time)
     
     return {"filename": file.filename}
 
@@ -55,6 +59,15 @@ def download_file(filename: str, username: str, password: str):
     
     file_path = f"uploads/{filename}"
     return FileResponse(path=file_path, filename=filename)
+
+@app.get("/files")
+def get_file_index(username: str, password: str):
+    # Check authentication
+    if username != USER or password != PASSWORD:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    
+    index = load_file_index()
+    return {"files": list(index.values())}
 
 # Index file management
 INDEX_FILE = "uploads/file_index.json"
