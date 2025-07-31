@@ -4,9 +4,23 @@ services:
     build: ./backend
     volumes:
       - ./backend/uploads:/app/uploads
+    expose:
+      - "8000"
+    networks:
+      - app-network
+      
+  nginx:
+    image: nginx:alpine
     ports:
-      - "3001:8000"
-  frontend:
-    build: ./frontend/FastDrive
-    ports:
-      - "8081:80"
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend/FastDrive/dist:/usr/share/nginx/html:ro
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -45,7 +45,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 
-const backendUrl = 'http://localhost:3001'
+const backendUrl = '/api'
 const username = ref('')
 const password = ref('')
 const loggedIn = ref(false)
