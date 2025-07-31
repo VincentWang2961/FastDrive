@@ -18,6 +18,6 @@ echo "🏗️ Building and starting services..."
 docker-compose up --build -d
 
 echo "✅ Deployment complete!"
-echo "🌐 Application is now available at: http://localhost:8081"
+echo "🌐 Application is now available at: http://localhost:8080"
 echo "📁 Frontend files are served by nginx"
 echo "🔗 API requests (/api/*) are proxied to backend"
