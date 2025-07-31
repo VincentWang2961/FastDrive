@@ -1,0 +1,58 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Python virtual environments
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# Python bytecode/cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Log files
+*.log
+
+# VSCode settings
+.vscode/
+
+# Uploaded files directory for backend (keep structure with .gitkeep if necessary)
+backend/uploads/
+!backend/uploads/.gitkeep
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.lock-wscript
+
+# Build outputs for frontend projects (such as Vue/Vite)
+Dist
+dist/
+frontend/**/dist
+
+# Local configuration/environment files
+*.local
+.env
+.env.*  # For example, .env.development, .env.production
+
+# Docker ignore files
+**/.dockerignore
+
+# Git directory
+.git/
+
+# Temporary or swap files
+*.swp
+*.swo
+*~
